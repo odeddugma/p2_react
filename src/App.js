@@ -36,8 +36,15 @@ function App() {
 		getUsersAndData();
 	}, []);
 
-	const getDataFromChild = (childValue) => {
+	/* const getDataFromChild = (childValue) => {
 		setUsers(...users, childValue);
+	}; */
+
+	const getDataFromChild = {
+		deleteUser: (id) => {
+			const newUsersList = users.filter((user) => user.id !== id);
+			setUsers(newUsersList);
+		},
 	};
 
 	return (

@@ -1,6 +1,8 @@
-import React from "react";
+import { useState } from "react";
 
-const User = ({ user }) => {
+const User = ({ user, callback }) => {
+	const [data, setData] = useState({});
+
 	//TODO: Remove after testing
 	if (user.id === 2) {
 		user.todos.map((todo) => (todo.completed = true));
@@ -12,6 +14,13 @@ const User = ({ user }) => {
 
 	const color = haveUncompletedTask ? "red" : "green";
 
+	const deleteUser = (id) => {
+		console.log("deleteUser " + id);
+		callback.deleteUser(id);
+	};
+
+	//console.log(data);
+
 	return (
 		<article
 			style={{ border: "1px solid", borderColor: color }}
@@ -19,11 +28,19 @@ const User = ({ user }) => {
 		>
 			<p>ID: {user.id}</p>
 			<p>
-				Name: <input type="text" placeholder={user.name} />
+				Name:{" "}
+				<input
+					type="text"
+					placeholder={user.name}
+					onInput={(e) => setData({ ...user, name: e.target.value })}
+				/>
 			</p>
 			<p>
 				Email: <input type="email" placeholder={user.email} />
 			</p>
+			<div>
+				<button onClick={() => deleteUser(user.id)}>Delete</button>
+			</div>
 		</article>
 	);
 };
