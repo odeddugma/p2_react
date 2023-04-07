@@ -1,7 +1,7 @@
 import { useState } from "react";
 
 const User = ({ user, callback }) => {
-	const [data, setData] = useState({});
+	const [data, setData] = useState(user);
 
 	//TODO: Remove after testing
 	if (user.id === 2) {
@@ -14,8 +14,13 @@ const User = ({ user, callback }) => {
 
 	const color = haveUncompletedTask ? "red" : "green";
 
+	//console.log(callback);
+
+	const updateteUser = () => {
+		callback.updateUser(data);
+	};
+
 	const deleteUser = (id) => {
-		console.log("deleteUser " + id);
 		callback.deleteUser(id);
 	};
 
@@ -36,9 +41,15 @@ const User = ({ user, callback }) => {
 				/>
 			</p>
 			<p>
-				Email: <input type="email" placeholder={user.email} />
+				Email:{" "}
+				<input
+					type="email"
+					placeholder={user.email}
+					onInput={(e) => setData({ ...user, email: e.target.value })}
+				/>
 			</p>
 			<div>
+				<button onClick={updateteUser}>Update</button>
 				<button onClick={() => deleteUser(user.id)}>Delete</button>
 			</div>
 		</article>

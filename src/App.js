@@ -45,6 +45,12 @@ function App() {
 			const newUsersList = users.filter((user) => user.id !== id);
 			setUsers(newUsersList);
 		},
+		updateUser: (updateUser) => {
+			const userIndex = users.findIndex((user) => user.id === updateUser.id);
+			users[userIndex] = updateUser;
+			const newUsersList = [...users];
+			setUsers(newUsersList);
+		},
 	};
 
 	return (
