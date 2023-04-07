@@ -1,6 +1,7 @@
 import "./App.css";
 import { useState, useEffect } from "react";
 import axios from "axios";
+import Main from "./Components/Main";
 
 const usersURL = "https://jsonplaceholder.typicode.com/users";
 const todosURL = "https://jsonplaceholder.typicode.com/todos/";
@@ -10,8 +11,6 @@ function App() {
 	const [users, setUsers] = useState([]);
 
 	useEffect(() => {
-		console.log("useEffect");
-
 		const getUsersAndData = async () => {
 			const users = (await axios.get(usersURL)).data;
 			const todos = (await axios.get(todosURL)).data;
@@ -37,9 +36,13 @@ function App() {
 		getUsersAndData();
 	}, []);
 
+	const getDataFromChild = (childValue) => {
+		setUsers(...users, childValue);
+	};
+
 	return (
 		<div className="App">
-			<div>main</div>
+			<Main users={users} callback={getDataFromChild} />
 			<div>side</div>
 		</div>
 	);
