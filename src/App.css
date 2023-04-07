@@ -12,5 +12,25 @@
 
 .userItem {
 	text-align: start;
-	padding: 0 10px 3px 10px;
+	padding: 0 20px 3px 20px;
+}
+
+.userItem input {
+	float: right;
+}
+
+.other-data-container {
+	border: 2px solid black;
+	border-radius: 10%;
+	background-color: #ccc;
+	padding: 10px;
+	margin: 5px 0;
+}
+
+.hide {
+	display: none;
+}
+
+.show {
+	display: block;
 }
