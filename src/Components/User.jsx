@@ -1,7 +1,7 @@
 import { useState } from "react";
 
 const User = ({ user, callback }) => {
-	const [data, setData] = useState(user);
+	const [currentUserData, setCurrentUserData] = useState(user);
 	const [showOtherData, setShowOtherData] = useState(false);
 
 	//TODO: Remove after testing
@@ -16,27 +16,27 @@ const User = ({ user, callback }) => {
 	const color = haveUncompletedTask ? "red" : "green";
 
 	const updateteUser = () => {
-		callback.updateUser(data);
+		callback.updateUser(currentUserData);
 	};
 
 	const deleteUser = (id) => {
 		callback.deleteUser(id);
 	};
 
-	//console.log(data);
-
 	return (
 		<article
 			style={{ border: "1px solid", borderColor: color }}
 			className="userItem"
 		>
-			<p>ID: {user.id}</p>
+			<p>ID: {currentUserData.id}</p>
 			<p>
 				Name:{" "}
 				<input
 					type="text"
-					placeholder={user.name}
-					onInput={(e) => setData({ ...user, name: e.target.value })}
+					placeholder={currentUserData.name}
+					onInput={(e) =>
+						setCurrentUserData({ ...currentUserData, name: e.target.value })
+					}
 				/>
 			</p>
 			<p>
@@ -44,7 +44,9 @@ const User = ({ user, callback }) => {
 				<input
 					type="email"
 					placeholder={user.email}
-					onInput={(e) => setData({ ...user, email: e.target.value })}
+					onInput={(e) =>
+						setCurrentUserData({ ...currentUserData, email: e.target.value })
+					}
 				/>
 			</p>
 
@@ -62,13 +64,49 @@ const User = ({ user, callback }) => {
 			{showOtherData && (
 				<div className="other-data-container">
 					<p>
-						Street: <input type="text" placeholder={user.address.street} />
+						Street:{" "}
+						<input
+							type="text"
+							placeholder={currentUserData.address.street}
+							onInput={(e) =>
+								setCurrentUserData({
+									...currentUserData,
+									address: {
+										...currentUserData.address,
+										street: e.target.value,
+									},
+								})
+							}
+						/>
 					</p>
 					<p>
-						City: <input type="text" placeholder={user.address.city} />
+						City:{" "}
+						<input
+							type="text"
+							placeholder={currentUserData.address.city}
+							onInput={(e) =>
+								setCurrentUserData({
+									...currentUserData,
+									address: { ...currentUserData.address, city: e.target.value },
+								})
+							}
+						/>
 					</p>
 					<p>
-						Zip Code: <input type="text" placeholder={user.address.zipcode} />
+						Zip Code:{" "}
+						<input
+							type="text"
+							placeholder={user.address.zipcode}
+							onInput={(e) =>
+								setCurrentUserData({
+									...currentUserData,
+									address: {
+										...currentUserData.address,
+										zipcode: e.target.value,
+									},
+								})
+							}
+						/>
 					</p>
 				</div>
 			)}
