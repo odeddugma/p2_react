@@ -3,6 +3,7 @@ import { useState } from "react";
 const User = ({ user, callback }) => {
 	const [currentUserData, setCurrentUserData] = useState(user);
 	const [showOtherData, setShowOtherData] = useState(false);
+	const [isSelected, setIsSelected] = useState(false);
 
 	//TODO: Remove after testing
 	if (user.id === 2) {
@@ -26,9 +27,9 @@ const User = ({ user, callback }) => {
 	return (
 		<article
 			style={{ border: "1px solid", borderColor: color }}
-			className="userItem"
+			className={`userItem ${isSelected ? "selected" : ""}`}
 		>
-			<p>ID: {currentUserData.id}</p>
+			<p onClick={() => setIsSelected(!isSelected)}>ID: {currentUserData.id}</p>
 			<p>
 				Name:{" "}
 				<input

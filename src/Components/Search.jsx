@@ -6,8 +6,10 @@ const Search = ({ users, callback }) => {
 
 	useEffect(() => {
 		const usersCopy = [...users];
-		const matchedUsers = usersCopy.filter((user) =>
-			user.name.toLowerCase().includes(search)
+		const matchedUsers = usersCopy.filter(
+			(user) =>
+				user.name.toLowerCase().includes(search) ||
+				user.email.toLowerCase().includes(search)
 		);
 		setMatches(matchedUsers);
 	}, [search]);

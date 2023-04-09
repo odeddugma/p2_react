@@ -16,6 +16,10 @@
 	padding: 0 20px 3px 20px;
 }
 
+.userItem > p:first-child {
+	cursor: pointer;
+}
+
 .userItem input {
 	float: right;
 }
@@ -34,4 +38,8 @@
 
 .show {
 	display: block;
+}
+
+.selected {
+	background-color: #edbc61;
 }
