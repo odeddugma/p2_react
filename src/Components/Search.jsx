@@ -4,16 +4,12 @@ const Search = ({ users, callback }) => {
 	const [matches, setMatches] = useState([]);
 	const [search, setSearch] = useState("");
 
-	/* useEffect(() => {
-		setMatches(users);
-	}, []); */
-
 	useEffect(() => {
-		const matchedUsers = [...users];
-		const matchedUsersX = matchedUsers.filter((user) =>
+		const usersCopy = [...users];
+		const matchedUsers = usersCopy.filter((user) =>
 			user.name.toLowerCase().includes(search)
 		);
-		setMatches(matchedUsersX);
+		setMatches(matchedUsers);
 	}, [search]);
 
 	useEffect(() => {
