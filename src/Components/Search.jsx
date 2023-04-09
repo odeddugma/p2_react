@@ -1,26 +1,34 @@
 import { useState, useEffect } from "react";
 
 const Search = ({ users, callback }) => {
-	//const [currentUsers, setCurrentUsers] = useState([]);
 	const [matches, setMatches] = useState([]);
+	const [search, setSearch] = useState("");
 
-	/* 	useEffect(() => {
-		setCurrentUsers(users);
-	}, [users]); */
+	/* useEffect(() => {
+		setMatches(users);
+	}, []); */
+
+	useEffect(() => {
+		const matchedUsers = [...users];
+		const matchedUsersX = matchedUsers.filter((user) =>
+			user.name.toLowerCase().includes(search)
+		);
+		setMatches(matchedUsersX);
+	}, [search]);
 
 	useEffect(() => {
 		callback.searchUser(matches);
 	}, [matches]);
 
-	const search = (e) => {
-		const searchedName = e.target.value;
-		setMatches(users.filter((user) => user.name == searchedName));
-	};
-
 	return (
 		<div>
 			<p>
-				Search: <input type="text" placeholder="Search" onInput={search} />
+				Search:{" "}
+				<input
+					type="text"
+					placeholder="Search"
+					onInput={(e) => setSearch(e.target.value.toLowerCase())}
+				/>
 			</p>
 		</div>
 	);

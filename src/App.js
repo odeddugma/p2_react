@@ -9,7 +9,7 @@ const postsURL = "https://jsonplaceholder.typicode.com/posts";
 
 function App() {
 	const [users, setUsers] = useState([]);
-	const [searchedUsers, setSearchedUsers] = useState([]);
+	const [displayedUsers, setDisplayedUsers] = useState([]);
 
 	useEffect(() => {
 		const getUsersAndData = async () => {
@@ -37,14 +37,13 @@ function App() {
 		getUsersAndData();
 	}, []);
 
-	/* const getDataFromChild = (childValue) => {
-		setUsers(...users, childValue);
-	}; */
+	useEffect(() => {
+		setDisplayedUsers(users);
+	}, [users]);
 
 	const getDataFromChild = {
-		searchUser: (mathedUsers) => {
-			console.log(mathedUsers);
-			setSearchedUsers(mathedUsers);
+		searchUser: (matchedUsers) => {
+			setDisplayedUsers(matchedUsers);
 		},
 		deleteUser: (id) => {
 			const newUsersList = users.filter((user) => user.id !== id);
@@ -61,7 +60,8 @@ function App() {
 	return (
 		<div className="App">
 			<Main
-				users={searchedUsers.length > 0 ? searchedUsers : users}
+				users={users}
+				displayedUsers={displayedUsers}
 				callback={getDataFromChild}
 			/>
 			<div>side</div>
