@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 const User = ({ user, callback }) => {
 	const [currentUserData, setCurrentUserData] = useState(user);
@@ -23,6 +23,11 @@ const User = ({ user, callback }) => {
 	const deleteUser = (id) => {
 		callback.deleteUser(id);
 	};
+
+	useEffect(() => {
+		if (!isSelected) return callback.showUserPostsAndTodos({});
+		callback.showUserPostsAndTodos(user);
+	}, [isSelected]);
 
 	return (
 		<article

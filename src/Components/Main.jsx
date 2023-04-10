@@ -3,8 +3,6 @@ import Users from "./Users";
 import Search from "./Search";
 
 const Main = ({ users, displayedUsers, callback }) => {
-	//console.log(users);
-
 	return (
 		<div>
 			<h1>main</h1>

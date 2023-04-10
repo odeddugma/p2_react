@@ -2,6 +2,7 @@ import "./App.css";
 import { useState, useEffect } from "react";
 import axios from "axios";
 import Main from "./Components/Main";
+import Sidebar from "./Components/Sidebar";
 
 const usersURL = "https://jsonplaceholder.typicode.com/users";
 const todosURL = "https://jsonplaceholder.typicode.com/todos/";
@@ -10,6 +11,7 @@ const postsURL = "https://jsonplaceholder.typicode.com/posts";
 function App() {
 	const [users, setUsers] = useState([]);
 	const [displayedUsers, setDisplayedUsers] = useState([]);
+	const [selectedUser, setSelectedUser] = useState({});
 
 	useEffect(() => {
 		const getUsersAndData = async () => {
@@ -55,6 +57,9 @@ function App() {
 			const newUsersList = [...users];
 			setUsers(newUsersList);
 		},
+		showUserPostsAndTodos: (user) => {
+			setSelectedUser(user);
+		},
 	};
 
 	return (
@@ -64,7 +69,7 @@ function App() {
 				displayedUsers={displayedUsers}
 				callback={getDataFromChild}
 			/>
-			<div>side</div>
+			{selectedUser.id && <Sidebar user={selectedUser} />}
 		</div>
 	);
 }
