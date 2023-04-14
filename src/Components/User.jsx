@@ -8,12 +8,12 @@ const User = ({ user, callback }) => {
 	//TODO: Remove after testing
 	if (user.id === 2) {
 		user.todos.map((todo) => (todo.completed = true));
+		//user.todos[0].completed = false;
 	}
 
 	const haveUncompletedTask = user.todos.some(
 		(todo) => todo.completed === false
 	);
-
 	const color = haveUncompletedTask ? "red" : "green";
 
 	const updateteUser = () => {
@@ -29,9 +29,13 @@ const User = ({ user, callback }) => {
 		callback.showUserPostsAndTodos(user);
 	}, [isSelected]);
 
+	/* 	useEffect(() => {
+		console.log("color");
+	}, [currentUserData.todos]); */
+
 	return (
 		<article
-			style={{ border: "1px solid", borderColor: color }}
+			style={{ margin: "5px 0", border: "2px solid", borderColor: color }}
 			className={`userItem ${isSelected ? "selected" : ""}`}
 		>
 			<p onClick={() => setIsSelected(!isSelected)}>ID: {currentUserData.id}</p>

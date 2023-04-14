@@ -33,6 +33,10 @@ function App() {
 					}
 				}
 			}
+
+			// Order by user id
+			users.sort((a, b) => a.id - b.id);
+
 			setUsers(users);
 		};
 
@@ -42,6 +46,10 @@ function App() {
 	useEffect(() => {
 		setDisplayedUsers(users);
 	}, [users]);
+
+	/* useEffect(() => {
+		console.log("users changed");
+	}, [users]); */
 
 	const getDataFromChild = {
 		searchUser: (matchedUsers) => {
@@ -60,6 +68,17 @@ function App() {
 		showUserPostsAndTodos: (user) => {
 			setSelectedUser(user);
 		},
+		markCompleted: (updateTodo) => {
+			const userIndex = users.findIndex(
+				(user) => user.id === updateTodo.userId
+			);
+			const todoIndex = users[userIndex].todos.findIndex(
+				(todo) => todo.id === updateTodo.id
+			);
+			users[userIndex].todos[todoIndex] = updateTodo;
+			//console.log(users[1].todos[0]);
+			setUsers(users);
+		},
 	};
 
 	return (
@@ -69,7 +88,9 @@ function App() {
 				displayedUsers={displayedUsers}
 				callback={getDataFromChild}
 			/>
-			{selectedUser.id && <Sidebar user={selectedUser} />}
+			{selectedUser.id && (
+				<Sidebar user={selectedUser} callback={getDataFromChild} />
+			)}
 		</div>
 	);
 }

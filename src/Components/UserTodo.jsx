@@ -1,11 +1,21 @@
-import React from "react";
+import { useState, useEffect } from "react";
 
-const UserTodo = ({ todo }) => {
+const UserTodo = ({ todo, callback }) => {
+	const [isCompleted, setIsCompleted] = useState(todo.completed);
+
+	useEffect(() => {
+		todo.completed = isCompleted;
+		callback.markCompleted(todo);
+	}, [isCompleted]);
+
 	return (
 		<li className="todo-item">
-			<div style={{ backgroundColor: todo.completed ? "#7ee98b" : "#f09494" }}>
+			<div style={{ backgroundColor: isCompleted ? "#7ee98b" : "#f09494" }}>
 				<p>Title: {todo.title}</p>
 				<p>Completed: {todo.completed.toString()}</p>
+				{!isCompleted && (
+					<button onClick={() => setIsCompleted(true)}>Mark Completed</button>
+				)}
 			</div>
 		</li>
 	);
