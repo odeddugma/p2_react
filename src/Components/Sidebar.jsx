@@ -6,7 +6,7 @@ const Sidebar = ({ user, callback }) => {
 	return (
 		<div>
 			<h1>sidebar</h1>
-			<UserTodos id={user.id} todos={user.todos} callback={callback} />
+			<UserTodos user={user} callback={callback} />
 			<UserPosts id={user.id} posts={user.posts} />
 		</div>
 	);

@@ -4,17 +4,25 @@ const User = ({ user, callback }) => {
 	const [currentUserData, setCurrentUserData] = useState(user);
 	const [showOtherData, setShowOtherData] = useState(false);
 	const [isSelected, setIsSelected] = useState(false);
+	const [haveUncompletedTask, setHaveUncompletedTask] = useState(false);
 
 	//TODO: Remove after testing
-	if (user.id === 2) {
+	if (user.id === 1) {
 		user.todos.map((todo) => (todo.completed = true));
-		//user.todos[0].completed = false;
+		user.todos[0].completed = false;
 	}
 
-	const haveUncompletedTask = user.todos.some(
+	//Check for uncompleted tasks
+	/* const haveUncompletedTask = user.todos.some(
 		(todo) => todo.completed === false
-	);
-	const color = haveUncompletedTask ? "red" : "green";
+	); */
+	useEffect(() => {
+		if (user.todos.some((todo) => todo.completed === false)) {
+			setHaveUncompletedTask(true);
+		}
+	}, [user]);
+
+	//const color = haveUncompletedTask ? "red" : "green";
 
 	const updateteUser = () => {
 		callback.updateUser(currentUserData);
@@ -29,13 +37,17 @@ const User = ({ user, callback }) => {
 		callback.showUserPostsAndTodos(user);
 	}, [isSelected]);
 
-	/* 	useEffect(() => {
-		console.log("color");
-	}, [currentUserData.todos]); */
+	useEffect(() => {
+		setCurrentUserData(user);
+	});
 
 	return (
 		<article
-			style={{ margin: "5px 0", border: "2px solid", borderColor: color }}
+			style={{
+				margin: "5px 0",
+				border: "2px solid",
+				borderColor: haveUncompletedTask ? "red" : "green",
+			}}
 			className={`userItem ${isSelected ? "selected" : ""}`}
 		>
 			<p onClick={() => setIsSelected(!isSelected)}>ID: {currentUserData.id}</p>

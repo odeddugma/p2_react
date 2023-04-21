@@ -1,14 +1,20 @@
-import React from "react";
+import { useEffect } from "react";
 import User from "./User";
 
 const Users = ({ users, callback }) => {
+	useEffect(() => {
+		console.log(users);
+	}, [users]);
+
 	return (
 		<ul className="usersList">
-			{users.map((user) => (
-				<li key={user.id}>
-					<User user={user} callback={callback} />
-				</li>
-			))}
+			{users.map((user) => {
+				return (
+					<li key={user.id}>
+						<User user={user} callback={callback} />
+					</li>
+				);
+			})}
 		</ul>
 	);
 };

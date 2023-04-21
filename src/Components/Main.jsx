@@ -1,17 +1,21 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Users from "./Users";
 import Search from "./Search";
 
 const Main = ({ users, displayedUsers, callback }) => {
+	const [displayedUserst, setDisplayedUserst] = useState(displayedUsers);
+
+	useEffect(() => {
+		setDisplayedUserst(users);
+	}, [users, displayedUsers]);
+
+	//console.log(userst);
+
 	return (
 		<div>
 			<h1>main</h1>
-			<Search
-				users={users}
-				displayedUsers={displayedUsers}
-				callback={callback}
-			/>
-			<Users users={displayedUsers} callback={callback} />
+			<Search users={users} callback={callback} />
+			<Users users={displayedUserst} callback={callback} />
 		</div>
 	);
 };

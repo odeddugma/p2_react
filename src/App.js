@@ -11,6 +11,7 @@ const postsURL = "https://jsonplaceholder.typicode.com/posts";
 function App() {
 	const [users, setUsers] = useState([]);
 	const [displayedUsers, setDisplayedUsers] = useState([]);
+	const [searchedUsers, setSearchedUsers] = useState([]);
 	const [selectedUser, setSelectedUser] = useState({});
 
 	useEffect(() => {
@@ -44,16 +45,26 @@ function App() {
 	}, []);
 
 	useEffect(() => {
-		setDisplayedUsers(users);
-	}, [users]);
+		if (searchedUsers.length > 0) {
+			setDisplayedUsers(searchedUsers);
+		} else {
+			setDisplayedUsers(users);
+		}
+	}, [users, searchedUsers]);
 
-	/* useEffect(() => {
-		console.log("users changed");
-	}, [users]); */
+	useEffect(() => {
+		if (selectedUser.id) {
+			const selectedUserIndex = users.findIndex(
+				(user) => user.id === selectedUser.id
+			);
+			//console.log(selectedUserIndex);
+			setSelectedUser(users[selectedUserIndex]);
+		}
+	}, [users]);
 
 	const getDataFromChild = {
 		searchUser: (matchedUsers) => {
-			setDisplayedUsers(matchedUsers);
+			setSearchedUsers(matchedUsers);
 		},
 		deleteUser: (id) => {
 			const newUsersList = users.filter((user) => user.id !== id);
@@ -76,8 +87,10 @@ function App() {
 				(todo) => todo.id === updateTodo.id
 			);
 			users[userIndex].todos[todoIndex] = updateTodo;
-			//console.log(users[1].todos[0]);
 			setUsers(users);
+		},
+		addTodo: (todo) => {
+			console.log(todo);
 		},
 	};
 
