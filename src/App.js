@@ -93,9 +93,8 @@ function App() {
 			const userIndex = users.findIndex((user) => user.id === userId);
 			const todoId = users[userIndex].todos.push(todo);
 			todo.id = todoId;
-			//const newUsersList = [...users];
-			console.log(users);
-			//setUsers(newUsersList);
+			setUsers(users);
+			setAddTodoState(false);
 		},
 		todoState: (state, id) => {
 			console.log(id, state);
