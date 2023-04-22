@@ -13,6 +13,7 @@ function App() {
 	const [displayedUsers, setDisplayedUsers] = useState([]);
 	const [searchedUsers, setSearchedUsers] = useState([]);
 	const [selectedUser, setSelectedUser] = useState({});
+	const [addTodoState, setAddTodoState] = useState(false);
 
 	useEffect(() => {
 		const getUsersAndData = async () => {
@@ -57,7 +58,6 @@ function App() {
 			const selectedUserIndex = users.findIndex(
 				(user) => user.id === selectedUser.id
 			);
-			//console.log(selectedUserIndex);
 			setSelectedUser(users[selectedUserIndex]);
 		}
 	}, [users]);
@@ -89,8 +89,17 @@ function App() {
 			users[userIndex].todos[todoIndex] = updateTodo;
 			setUsers(users);
 		},
-		addTodo: (todo) => {
-			console.log(todo);
+		addTodo: (userId, todo) => {
+			const userIndex = users.findIndex((user) => user.id === userId);
+			const todoId = users[userIndex].todos.push(todo);
+			todo.id = todoId;
+			//const newUsersList = [...users];
+			console.log(users);
+			//setUsers(newUsersList);
+		},
+		todoState: (state, id) => {
+			console.log(id, state);
+			setAddTodoState(state);
 		},
 	};
 
@@ -102,7 +111,11 @@ function App() {
 				callback={getDataFromChild}
 			/>
 			{selectedUser.id && (
-				<Sidebar user={selectedUser} callback={getDataFromChild} />
+				<Sidebar
+					user={selectedUser}
+					addTodoState={addTodoState}
+					callback={getDataFromChild}
+				/>
 			)}
 		</div>
 	);

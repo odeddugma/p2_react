@@ -1,10 +1,20 @@
 import { useState } from "react";
 
-const AddTodo = (user, callback, addTodo) => {
-	const [todos, setTodos] = useState(user.todos);
-	const [addTodoState, setAddTodoState] = useState(false);
+const AddTodo = (props) => {
+	const [todo, setTodo] = useState({
+		userId: props.user.id,
+		title: "",
+		completed: false,
+	});
+	const [addTodoState, setAddTodoState] = useState(props.addTodoState);
 
-	const handleAddClick = () => {};
+	const handleCancelClick = () => {
+		props.callback.todoState(!addTodoState);
+	};
+
+	const handleAddClick = () => {
+		props.callback.addTodo(props.user.id, todo);
+	};
 
 	return (
 		<div>
@@ -12,10 +22,10 @@ const AddTodo = (user, callback, addTodo) => {
 				Title:{" "}
 				<input
 					type="text"
-					onInput={(e) => setTodos([todos, ...e.target.value])}
+					onInput={(e) => setTodo({ ...todo, title: e.target.value })}
 				/>
 			</p>
-			<button>Cancel</button>
+			<button onClick={handleCancelClick}>Cancel</button>
 			<button onClick={handleAddClick}>Add</button>
 		</div>
 	);
