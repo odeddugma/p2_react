@@ -1,15 +1,15 @@
 import { useEffect, useState } from "react";
 
-const User = ({ user, callback }) => {
-	const [currentUserData, setCurrentUserData] = useState(user);
+const User = (props) => {
+	const [currentUserData, setCurrentUserData] = useState(props.user);
 	const [showOtherData, setShowOtherData] = useState(false);
 	const [isSelected, setIsSelected] = useState(false);
 	const [haveUncompletedTask, setHaveUncompletedTask] = useState(false);
 
 	//TODO: Remove after testing
-	if (user.id === 1) {
-		user.todos.map((todo) => (todo.completed = true));
-		user.todos[0].completed = false;
+	if (currentUserData.id === 1) {
+		currentUserData.todos.map((todo) => (todo.completed = true));
+		currentUserData.todos[0].completed = false;
 	}
 
 	//Check for uncompleted tasks
@@ -17,28 +17,32 @@ const User = ({ user, callback }) => {
 		(todo) => todo.completed === false
 	); */
 	useEffect(() => {
-		if (user.todos.some((todo) => todo.completed === false)) {
+		console.log("test");
+	}, [currentUserData]);
+
+	useEffect(() => {
+		if (currentUserData.todos.some((todo) => todo.completed === false)) {
 			setHaveUncompletedTask(true);
 		}
-	}, [user]);
+	}, [currentUserData]);
 
 	//const color = haveUncompletedTask ? "red" : "green";
 
 	const updateteUser = () => {
-		callback.updateUser(currentUserData);
+		props.callback.updateUser(currentUserData);
 	};
 
 	const deleteUser = (id) => {
-		callback.deleteUser(id);
+		props.callback.deleteUser(id);
 	};
 
 	useEffect(() => {
-		if (!isSelected) return callback.showUserPostsAndTodos({});
-		callback.showUserPostsAndTodos(user);
+		if (!isSelected) return props.callback.showUserPostsAndTodos({});
+		props.callback.showUserPostsAndTodos(currentUserData);
 	}, [isSelected]);
 
 	useEffect(() => {
-		setCurrentUserData(user);
+		setCurrentUserData(props.user);
 	});
 
 	return (
@@ -65,7 +69,7 @@ const User = ({ user, callback }) => {
 				Email:{" "}
 				<input
 					type="email"
-					placeholder={user.email}
+					placeholder={currentUserData.email}
 					onInput={(e) =>
 						setCurrentUserData({ ...currentUserData, email: e.target.value })
 					}
@@ -80,7 +84,7 @@ const User = ({ user, callback }) => {
 					Otehr Data
 				</button>
 				<button onClick={updateteUser}>Update</button>
-				<button onClick={() => deleteUser(user.id)}>Delete</button>
+				<button onClick={() => deleteUser(currentUserData.id)}>Delete</button>
 			</div>
 
 			{showOtherData && (
@@ -118,7 +122,7 @@ const User = ({ user, callback }) => {
 						Zip Code:{" "}
 						<input
 							type="text"
-							placeholder={user.address.zipcode}
+							placeholder={currentUserData.address.zipcode}
 							onInput={(e) =>
 								setCurrentUserData({
 									...currentUserData,
