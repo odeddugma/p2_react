@@ -6,25 +6,22 @@ const User = (props) => {
 	const [isSelected, setIsSelected] = useState(false);
 	const [haveUncompletedTask, setHaveUncompletedTask] = useState(false);
 
-	//TODO: Remove after testing
+	/* 	//TODO: Remove after testing
 	if (currentUserData.id === 1) {
 		currentUserData.todos.map((todo) => (todo.completed = true));
 		currentUserData.todos[0].completed = false;
-	}
+	} */
 
 	//Check for uncompleted tasks
 	/* const haveUncompletedTask = user.todos.some(
 		(todo) => todo.completed === false
 	); */
-	useEffect(() => {
-		console.log("test");
-	}, [currentUserData]);
 
 	useEffect(() => {
 		if (currentUserData.todos.some((todo) => todo.completed === false)) {
 			setHaveUncompletedTask(true);
 		}
-	}, [currentUserData]);
+	}, [props]);
 
 	//const color = haveUncompletedTask ? "red" : "green";
 

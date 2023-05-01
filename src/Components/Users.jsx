@@ -3,7 +3,7 @@ import User from "./User";
 
 const Users = ({ users, callback }) => {
 	useEffect(() => {
-		console.log(users);
+		users.sort((a, b) => a.id - b.id);
 	}, [users]);
 
 	return (

@@ -8,7 +8,6 @@ const UserTodos = (props) => {
 	const [addTodoState, setAddTodoState] = useState(props.addTodoState);
 
 	useEffect(() => {
-		console.log(addTodoState);
 		setAddTodoState(props.addTodoState);
 	}, [props]);
 

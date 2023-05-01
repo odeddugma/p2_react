@@ -91,13 +91,12 @@ function App() {
 		},
 		addTodo: (userId, todo) => {
 			const userIndex = users.findIndex((user) => user.id === userId);
-			const todoId = users[userIndex].todos.push(todo);
+			const todoId = users[userIndex].todos.unshift(todo);
 			todo.id = todoId;
 			setUsers(users);
 			setAddTodoState(false);
 		},
 		todoState: (state, id) => {
-			console.log(id, state);
 			setAddTodoState(state);
 		},
 	};

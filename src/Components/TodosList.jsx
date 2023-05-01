@@ -5,8 +5,6 @@ const TodosList = (props) => {
 	const { id, todos, callback } = props;
 	const [addTodoState, setAddTodoState] = useState(props.addTodoState);
 
-	console.log(props);
-
 	useEffect(() => {
 		callback.todoState(addTodoState);
 	}, [addTodoState]);
