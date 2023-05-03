@@ -7,7 +7,6 @@ const User = ({ user, callback }) => {
 	const [color, setColor] = useState("");
 
 	useEffect(() => {
-		//console.log(currentUser.todos.length);
 		if (currentUser.todos.some((todo) => todo.completed === false)) {
 			setColor("red");
 		} else {
@@ -58,13 +57,23 @@ const User = ({ user, callback }) => {
 
 			<div>
 				<button
+					className="btn-grey"
 					onMouseOver={() => setShowOtherData(true)}
 					onClick={() => setShowOtherData(false)}
 				>
 					Other Data
 				</button>
-				<button onClick={updateUser}>Update User</button>
-				<button onClick={() => deleteUser(currentUser.id)}>Delete</button>
+				<span className="float-right">
+					<button className="btn-yellow" onClick={updateUser}>
+						Update
+					</button>
+					<button
+						className="btn-yellow"
+						onClick={() => deleteUser(currentUser.id)}
+					>
+						Delete
+					</button>
+				</span>
 			</div>
 
 			{showOtherData && (

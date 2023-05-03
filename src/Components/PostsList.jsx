@@ -11,8 +11,12 @@ const PostsList = (props) => {
 
 	return (
 		<div>
-			<h5>Posts - User {userId}</h5>
-			<button onClick={() => setAddPostState(true)}>ADD</button>
+			<div className="sidebar-top-strip">
+				<h5>Posts - User {userId}</h5>
+				<button className="btn-yellow" onClick={() => setAddPostState(true)}>
+					ADD
+				</button>
+			</div>
 			<ul className="posts-list">
 				{posts.map((post) => (
 					<UserPost key={post.id} post={post} />

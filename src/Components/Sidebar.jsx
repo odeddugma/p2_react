@@ -11,8 +11,7 @@ const Sidebar = ({
 	callback,
 }) => {
 	return (
-		<div>
-			<h1>sidebar</h1>
+		<div className="sidebar">
 			{addUserState ? (
 				<AddUser addUserState={addUserState} callback={callback} />
 			) : (

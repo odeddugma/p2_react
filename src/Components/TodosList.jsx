@@ -11,8 +11,12 @@ const TodosList = (props) => {
 
 	return (
 		<div>
-			<h5>Todos - User {id}</h5>
-			<button onClick={() => setAddTodoState(true)}>ADD</button>
+			<div className="sidebar-top-strip">
+				<h5>Todos - User {id}</h5>
+				<button className="btn-yellow" onClick={() => setAddTodoState(true)}>
+					ADD
+				</button>
+			</div>
 			<ul className="todos-list">
 				{todos.map((todo) => (
 					<UserTodo

@@ -1,16 +1,49 @@
+*,
+*::before,
+*::after {
+	box-sizing: border-box;
+}
+
+h5 {
+	display: inline-block;
+}
+
 .App {
-	text-align: center;
 	display: flex;
-	/* 	justify-content: space-evenly;
- */
+	text-align: center;
+	padding: 20px 40px;
+	margin: 10px;
+}
+
+.main {
+	width: 350px;
+	padding: 5px;
+	border: 2px solid black;
+	border-radius: 15px;
+}
+
+.sidebar {
+	width: 450px;
+}
+
+.main-top-strip {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	padding: 5px;
+}
+
+.sidebar-top-strip {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	margin-inline: 20px;
 }
 
 .usersList {
 	list-style: none;
 	margin: 0;
 	padding: 0;
-	/* 	width: 120%;
- */
 }
 
 .userItem {
@@ -26,6 +59,8 @@
 
 .userItem input {
 	float: right;
+	/* margin-inline-end: 40px; */
+	width: 70%;
 }
 
 .todos-list,
@@ -64,6 +99,22 @@
 
 .selected {
 	background-color: #edbc61;
+}
+
+.float-right {
+	float: right;
+}
+
+.btn-yellow {
+	background-color: #f1d5a1;
+	border: 1px solid lightblue;
+	padding: 5px 10px;
+}
+
+.btn-grey {
+	background-color: #bbb;
+	border: none;
+	padding: 5px 10px;
 }
 
 .bg {
