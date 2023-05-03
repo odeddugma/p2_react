@@ -7,6 +7,7 @@ const User = ({ user, callback }) => {
 	const [color, setColor] = useState("");
 
 	useEffect(() => {
+		//console.log(currentUser.todos.length);
 		if (currentUser.todos.some((todo) => todo.completed === false)) {
 			setColor("red");
 		} else {

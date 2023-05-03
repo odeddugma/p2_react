@@ -15,6 +15,7 @@ function App() {
 	const [selectedUser, setSelectedUser] = useState({});
 	const [addTodoState, setAddTodoState] = useState(false);
 	const [addPostState, setAddPostState] = useState(false);
+	const [addUserState, setAddUserState] = useState(false);
 
 	useEffect(() => {
 		const getUsersAndData = async () => {
@@ -61,6 +62,8 @@ function App() {
 			);
 			setSelectedUser(users[selectedUserIndex]);
 		}
+
+		setDisplayedUsers(users);
 	}, [users]);
 
 	const getDataFromChild = {
@@ -115,6 +118,28 @@ function App() {
 		changeAddPostDisplayState: (state) => {
 			setAddPostState(state);
 		},
+		addUser: (user) => {
+			const newUsersList = [...users];
+			const newUser = {
+				id: users.length + 1,
+				name: user.name,
+				email: user.email,
+				address: {
+					city: "",
+					street: "",
+					zipcode: "",
+				},
+				todos: [],
+				posts: [],
+			};
+			newUsersList.push(newUser);
+			console.log(newUsersList);
+			setUsers(newUsersList);
+			setAddUserState(false);
+		},
+		changeAddUserDisplayState: (state) => {
+			setAddUserState(state);
+		},
 	};
 
 	return (
@@ -122,13 +147,15 @@ function App() {
 			<Main
 				users={users}
 				displayedUsers={displayedUsers}
+				addUserState={addUserState}
 				callback={getDataFromChild}
 			/>
-			{selectedUser.id && (
+			{(addUserState || selectedUser.id) && (
 				<Sidebar
 					user={selectedUser}
 					addTodoState={addTodoState}
 					addPostState={addPostState}
+					addUserState={addUserState}
 					callback={getDataFromChild}
 				/>
 			)}
