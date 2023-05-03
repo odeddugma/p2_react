@@ -1,3 +1,4 @@
+import AddPost from "./AddPost";
 import PostsList from "./PostsList";
 import UserPost from "./UserPost";
 
@@ -5,7 +6,7 @@ const UserPosts = ({ user, addPostState, callback }) => {
 	return (
 		<div>
 			{addPostState ? (
-				<p>ss</p>
+				<AddPost user={user} addPostState={addPostState} callback={callback} />
 			) : (
 				<PostsList
 					userId={user.id}
