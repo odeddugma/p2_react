@@ -1,64 +1,46 @@
 import { useEffect, useState } from "react";
 
-const User = (props) => {
-	const [currentUserData, setCurrentUserData] = useState(props.user);
+const User = ({ user, callback }) => {
+	const [currentUser, setCurrentUser] = useState(user);
 	const [showOtherData, setShowOtherData] = useState(false);
 	const [isSelected, setIsSelected] = useState(false);
-	const [haveUncompletedTask, setHaveUncompletedTask] = useState(false);
-
-	/* 	//TODO: Remove after testing
-	if (currentUserData.id === 1) {
-		currentUserData.todos.map((todo) => (todo.completed = true));
-		currentUserData.todos[0].completed = false;
-	} */
-
-	//Check for uncompleted tasks
-	/* const haveUncompletedTask = user.todos.some(
-		(todo) => todo.completed === false
-	); */
+	const [color, setColor] = useState("");
 
 	useEffect(() => {
-		if (currentUserData.todos.some((todo) => todo.completed === false)) {
-			setHaveUncompletedTask(true);
+		if (currentUser.todos.some((todo) => todo.completed === false)) {
+			setColor("red");
+		} else {
+			setColor("green");
 		}
-	}, [props]);
+	}, [currentUser]);
 
-	//const color = haveUncompletedTask ? "red" : "green";
+	useEffect(() => {
+		if (!isSelected) return callback.showUserPostsAndTodos({});
 
-	const updateteUser = () => {
-		props.callback.updateUser(currentUserData);
+		callback.showUserPostsAndTodos(currentUser);
+	}, [isSelected]);
+
+	const updateUser = () => {
+		callback.updateUser(currentUser);
 	};
 
 	const deleteUser = (id) => {
-		props.callback.deleteUser(id);
+		callback.deleteUser(id);
 	};
-
-	useEffect(() => {
-		if (!isSelected) return props.callback.showUserPostsAndTodos({});
-		props.callback.showUserPostsAndTodos(currentUserData);
-	}, [isSelected]);
-
-	useEffect(() => {
-		setCurrentUserData(props.user);
-	});
 
 	return (
 		<article
-			style={{
-				margin: "5px 0",
-				border: "2px solid",
-				borderColor: haveUncompletedTask ? "red" : "green",
-			}}
 			className={`userItem ${isSelected ? "selected" : ""}`}
+			style={{ borderColor: color }}
 		>
-			<p onClick={() => setIsSelected(!isSelected)}>ID: {currentUserData.id}</p>
+			<p onClick={() => setIsSelected(!isSelected)}>ID: {user.id}</p>
 			<p>
 				Name:{" "}
 				<input
 					type="text"
-					placeholder={currentUserData.name}
+					placeholder={user.name}
 					onInput={(e) =>
-						setCurrentUserData({ ...currentUserData, name: e.target.value })
+						setCurrentUser({ ...currentUser, name: e.target.value })
 					}
 				/>
 			</p>
@@ -66,9 +48,9 @@ const User = (props) => {
 				Email:{" "}
 				<input
 					type="email"
-					placeholder={currentUserData.email}
+					placeholder={currentUser.email}
 					onInput={(e) =>
-						setCurrentUserData({ ...currentUserData, email: e.target.value })
+						setCurrentUser({ ...currentUser, email: e.target.value })
 					}
 				/>
 			</p>
@@ -78,10 +60,10 @@ const User = (props) => {
 					onMouseOver={() => setShowOtherData(true)}
 					onClick={() => setShowOtherData(false)}
 				>
-					Otehr Data
+					Other Data
 				</button>
-				<button onClick={updateteUser}>Update</button>
-				<button onClick={() => deleteUser(currentUserData.id)}>Delete</button>
+				<button onClick={updateUser}>Update User</button>
+				<button onClick={() => deleteUser(currentUser.id)}>Delete</button>
 			</div>
 
 			{showOtherData && (
@@ -90,12 +72,12 @@ const User = (props) => {
 						Street:{" "}
 						<input
 							type="text"
-							placeholder={currentUserData.address.street}
+							placeholder={currentUser.address.street}
 							onInput={(e) =>
-								setCurrentUserData({
-									...currentUserData,
+								setCurrentUser({
+									...currentUser,
 									address: {
-										...currentUserData.address,
+										...currentUser.address,
 										street: e.target.value,
 									},
 								})
@@ -106,11 +88,11 @@ const User = (props) => {
 						City:{" "}
 						<input
 							type="text"
-							placeholder={currentUserData.address.city}
+							placeholder={currentUser.address.city}
 							onInput={(e) =>
-								setCurrentUserData({
-									...currentUserData,
-									address: { ...currentUserData.address, city: e.target.value },
+								setCurrentUser({
+									...currentUser,
+									address: { ...currentUser.address, city: e.target.value },
 								})
 							}
 						/>
@@ -119,12 +101,12 @@ const User = (props) => {
 						Zip Code:{" "}
 						<input
 							type="text"
-							placeholder={currentUserData.address.zipcode}
+							placeholder={currentUser.address.zipcode}
 							onInput={(e) =>
-								setCurrentUserData({
-									...currentUserData,
+								setCurrentUser({
+									...currentUser,
 									address: {
-										...currentUserData.address,
+										...currentUser.address,
 										zipcode: e.target.value,
 									},
 								})

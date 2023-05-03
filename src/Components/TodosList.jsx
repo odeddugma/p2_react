@@ -6,7 +6,7 @@ const TodosList = (props) => {
 	const [addTodoState, setAddTodoState] = useState(props.addTodoState);
 
 	useEffect(() => {
-		callback.todoState(addTodoState);
+		callback.changeAddTodoDisplayState(addTodoState);
 	}, [addTodoState]);
 
 	return (
@@ -18,8 +18,8 @@ const TodosList = (props) => {
 					<UserTodo
 						key={todo.id}
 						todo={todo}
+						//addTodoState={addTodoState}
 						callback={callback}
-						addTodoState={addTodoState}
 					/>
 				))}
 			</ul>

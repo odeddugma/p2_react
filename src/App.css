@@ -16,6 +16,8 @@
 .userItem {
 	text-align: start;
 	padding: 0 20px 3px 20px;
+	margin: 5px 0;
+	border: 2px solid;
 }
 
 .userItem > p:first-child {
@@ -62,4 +64,12 @@
 
 .selected {
 	background-color: #edbc61;
+}
+
+.bg {
+	border-color: green;
+}
+
+.br {
+	border-color: red;
 }

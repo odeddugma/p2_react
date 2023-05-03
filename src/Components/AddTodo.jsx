@@ -6,10 +6,9 @@ const AddTodo = (props) => {
 		title: "",
 		completed: false,
 	});
-	const [addTodoState, setAddTodoState] = useState(props.addTodoState);
 
 	const handleCancelClick = () => {
-		props.callback.todoState(!addTodoState);
+		props.callback.changeAddTodoDisplayState(!props.addTodoState);
 	};
 
 	const handleAddClick = () => {

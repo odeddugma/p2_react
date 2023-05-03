@@ -1,14 +1,19 @@
+import PostsList from "./PostsList";
 import UserPost from "./UserPost";
 
-const UserPosts = ({ id, posts }) => {
+const UserPosts = ({ user, addPostState, callback }) => {
 	return (
 		<div>
-			<h5>Posts - User {id}</h5>
-			<ul className="posts-list">
-				{posts.map((post) => (
-					<UserPost key={post.id} post={post} />
-				))}
-			</ul>
+			{addPostState ? (
+				<p>ss</p>
+			) : (
+				<PostsList
+					userId={user.id}
+					posts={user.posts}
+					addPostState={addPostState}
+					callback={callback}
+				/>
+			)}
 		</div>
 	);
 };

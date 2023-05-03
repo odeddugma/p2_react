@@ -4,27 +4,20 @@ import UserTodo from "./UserTodo";
 import TodosList from "./TodosList";
 
 const UserTodos = (props) => {
-	const [user, setUser] = useState(props.user);
-	const [addTodoState, setAddTodoState] = useState(props.addTodoState);
-
-	useEffect(() => {
-		setAddTodoState(props.addTodoState);
-	}, [props]);
-
 	return (
 		<div>
-			{addTodoState ? (
+			{props.addTodoState ? (
 				<AddTodo
-					user={user}
-					addTodoState={addTodoState}
+					user={props.user}
+					addTodoState={props.addTodoState}
 					callback={props.callback}
 				/>
 			) : (
 				<TodosList
-					id={user.id}
-					todos={user.todos}
+					id={props.user.id}
+					todos={props.user.todos}
+					addTodoState={props.addTodoState}
 					callback={props.callback}
-					addTodoState={addTodoState}
 				/>
 			)}
 		</div>

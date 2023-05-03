@@ -14,6 +14,7 @@ function App() {
 	const [searchedUsers, setSearchedUsers] = useState([]);
 	const [selectedUser, setSelectedUser] = useState({});
 	const [addTodoState, setAddTodoState] = useState(false);
+	const [addPostState, setAddPostState] = useState(false);
 
 	useEffect(() => {
 		const getUsersAndData = async () => {
@@ -71,33 +72,48 @@ function App() {
 			setUsers(newUsersList);
 		},
 		updateUser: (updateUser) => {
-			const userIndex = users.findIndex((user) => user.id === updateUser.id);
-			users[userIndex] = updateUser;
 			const newUsersList = [...users];
+			const userIndex = newUsersList.findIndex(
+				(user) => user.id === updateUser.id
+			);
+			newUsersList[userIndex] = updateUser;
 			setUsers(newUsersList);
 		},
 		showUserPostsAndTodos: (user) => {
 			setSelectedUser(user);
 		},
 		markCompleted: (updateTodo) => {
-			const userIndex = users.findIndex(
+			const newUsersList = [...users];
+			const userIndex = newUsersList.findIndex(
 				(user) => user.id === updateTodo.userId
 			);
-			const todoIndex = users[userIndex].todos.findIndex(
+			const todoIndex = newUsersList[userIndex].todos.findIndex(
 				(todo) => todo.id === updateTodo.id
 			);
-			users[userIndex].todos[todoIndex] = updateTodo;
-			setUsers(users);
+			newUsersList[userIndex].todos[todoIndex] = updateTodo;
+			setUsers(newUsersList);
 		},
 		addTodo: (userId, todo) => {
-			const userIndex = users.findIndex((user) => user.id === userId);
-			const todoId = users[userIndex].todos.unshift(todo);
+			const newUsersList = [...users];
+			const userIndex = newUsersList.findIndex((user) => user.id === userId);
+			const todoId = newUsersList[userIndex].todos.push(todo);
 			todo.id = todoId;
-			setUsers(users);
+			setUsers(newUsersList);
 			setAddTodoState(false);
 		},
-		todoState: (state, id) => {
+		changeAddTodoDisplayState: (state) => {
 			setAddTodoState(state);
+		},
+		addPost: (userId, post) => {
+			const newUsersList = [...users];
+			const userIndex = newUsersList.findIndex((user) => user.id === userId);
+			const postId = newUsersList[userIndex].posts.push(post);
+			post.id = postId;
+			setUsers(newUsersList);
+			setAddPostState(false);
+		},
+		changeAddPostDisplayState: (state) => {
+			setAddPostState(state);
 		},
 	};
 
@@ -112,6 +128,7 @@ function App() {
 				<Sidebar
 					user={selectedUser}
 					addTodoState={addTodoState}
+					addPostState={addPostState}
 					callback={getDataFromChild}
 				/>
 			)}

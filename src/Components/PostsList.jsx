@@ -1,0 +1,25 @@
+import { useEffect, useState } from "react";
+import UserPost from "./UserPost";
+
+const PostsList = (props) => {
+	const { userId, posts, callback } = props;
+	const [addPostState, setAddPostState] = useState(props.addPostState);
+
+	useEffect(() => {
+		callback.changeAddPostDisplayState(addPostState);
+	}, [addPostState]);
+
+	return (
+		<div>
+			<h5>Posts - User {userId}</h5>
+			<button onClick={() => setAddPostState(true)}>ADD</button>
+			<ul className="posts-list">
+				{posts.map((post) => (
+					<UserPost key={post.id} post={post} />
+				))}
+			</ul>
+		</div>
+	);
+};
+
+export default PostsList;
