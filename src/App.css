@@ -71,7 +71,8 @@ h5 {
 }
 
 .todo-item,
-.post-item {
+.post-item,
+.add-container {
 	text-align: start;
 	padding: 0 20px 3px 20px;
 }
@@ -79,6 +80,7 @@ h5 {
 .todo-item > div,
 .post-item > div {
 	border: 1px solid purple;
+	padding: 0 15px;
 }
 
 .other-data-container {
@@ -109,6 +111,7 @@ h5 {
 	background-color: #f1d5a1;
 	border: 1px solid lightblue;
 	padding: 5px 10px;
+	margin-left: 5px;
 }
 
 .btn-grey {
@@ -131,7 +134,25 @@ li.todo-item > div {
 	align-items: flex-end;
 }
 
+button {
+	cursor: pointer;
+}
+
 li.todo-item button {
 	margin-bottom: 1rem;
 	flex-shrink: 0;
+}
+
+.add-form {
+	border: 2px solid black;
+	padding: 10px 25px;
+	width: 80%;
+}
+
+.add-form input {
+	float: right;
+}
+
+.text-align-end {
+	text-align: end;
 }

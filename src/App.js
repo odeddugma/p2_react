@@ -55,7 +55,7 @@ function App() {
 		}
 	}, [users, searchedUsers]);
 
-	useEffect(() => {
+	/* useEffect(() => {
 		if (selectedUser.id) {
 			const selectedUserIndex = users.findIndex(
 				(user) => user.id === selectedUser.id
@@ -64,7 +64,7 @@ function App() {
 		}
 
 		setDisplayedUsers(users);
-	}, [users]);
+	}, [users]); */
 
 	const getDataFromChild = {
 		searchUser: (matchedUsers) => {
