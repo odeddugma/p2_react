@@ -23,7 +23,7 @@ h5 {
 }
 
 .sidebar {
-	width: 450px;
+	width: 550px;
 }
 
 .main-top-strip {
@@ -123,4 +123,15 @@ h5 {
 
 .br {
 	border-color: red;
+}
+
+li.todo-item > div {
+	display: flex;
+	justify-content: space-between;
+	align-items: flex-end;
+}
+
+li.todo-item button {
+	margin-bottom: 1rem;
+	flex-shrink: 0;
 }

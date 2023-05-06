@@ -11,10 +11,14 @@ const UserTodo = ({ todo, callback }) => {
 	return (
 		<li className="todo-item">
 			<div style={{ backgroundColor: isCompleted ? "#7ee98b" : "#f09494" }}>
-				<p>Title: {todo.title}</p>
-				<p>Completed: {isCompleted ? "True" : "False"}</p>
+				<div>
+					<p>Title: {todo.title}</p>
+					<p>Completed: {isCompleted ? "True" : "False"}</p>
+				</div>
 				{!isCompleted && (
-					<button onClick={() => setIsCompleted(true)}>Mark Completed</button>
+					<button className="btn-yellow" onClick={() => setIsCompleted(true)}>
+						Mark Completed
+					</button>
 				)}
 			</div>
 		</li>
