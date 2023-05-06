@@ -55,17 +55,6 @@ function App() {
 		}
 	}, [users, searchedUsers]);
 
-	/* useEffect(() => {
-		if (selectedUser.id) {
-			const selectedUserIndex = users.findIndex(
-				(user) => user.id === selectedUser.id
-			);
-			setSelectedUser(users[selectedUserIndex]);
-		}
-
-		setDisplayedUsers(users);
-	}, [users]); */
-
 	const getDataFromChild = {
 		searchUser: (matchedUsers) => {
 			setSearchedUsers(matchedUsers);
@@ -133,7 +122,6 @@ function App() {
 				posts: [],
 			};
 			newUsersList.push(newUser);
-			console.log(newUsersList);
 			setUsers(newUsersList);
 			setAddUserState(false);
 		},
